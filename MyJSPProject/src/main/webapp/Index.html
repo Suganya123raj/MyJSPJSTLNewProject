@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1> INSERT RECORD</h1>
+<form action="welcome.jsp" method="GET">
+
+    <label>First Name:</label>
+    <input type="text" name="first_name"><br><br>
+    <label>Last Name:</label>
+    <input type="text" name="last_name"><br><br>
+    <label>age:</label>
+    <input type="number" name="age"><br><br>
+    <label>Phone_no:</label>
+    <input type="text" name="phone_no"><br><br>
+    <label>Join Date:</label>
+    <input type="datetime-local" name="join_date"><br><br>
+    <input type="submit" value="submit">
+</form>
+<h2>Update Record</h2>
+<sql:setDataSource var="myDB" driver="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://localhost:3307/mavanproject" user="root" password="Crem$54321" />
+<sql:query dataSource="${myDB}" var="myIds">
+    SELECT emp_id FROM employees
+</sql:query>
+<form action="UpdateEmployees.jsp" method="POST">
+<select name="emp_id" >
+<c:forEach var="myId" items="${myIds.rows}">
+<option value="${myId.emp_id}">${myId.emp_id}</option>
+</c:forEach>
+</select>
+<fieldset>
+<label>Field:</label><input type="checkbox" name="myField" value="first_name">first_name<label>Value :</label><input type="text" name="first_nameInput"><br>
+<label>Field:</label><input type="checkbox" name="myField" value="last_name">last_name<label>Value :</label><input type="text" name="last_nameInput"><br>
+<label>Field:</label><input type="checkbox" name="myField" value="age">age<label>Value :</label><input type="text" name="ageInput"><br>
+<label>Field:</label><input type="checkbox" name="myField" value="phone_no">Phone_no<label>Value :</label><input type="text" name="phone_noInput"><br>
+<label>Field:</label><input type="checkbox" name="myField" value="join_date">join_date<label>Value :</label><input type="datetime-local" name="join_dateInput"><br>
+<input type="submit" value="Update Record">
+</fieldset>
+</form>
+</body>
+</html>
+
